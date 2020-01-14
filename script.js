@@ -1,23 +1,26 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
-
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-  copyBtn.removeAttribute("disabled");
-  copyBtn.focus();
+function random_password_generate(max,min)
+{
+    var passwordChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#@!%&()/";
+    var randPwLen = Math.floor(Math.random() * (max - min + 1)) + min;
+    var randPassword = Array(randPwLen).fill(passwordChars).map(function(x) { return x[Math.floor(Math.random() * x.length)] }).join('');
+    return randPassword;
 }
 
-function copyToClipboard() {
-  // BONUS 
-}
+document.getElementById("generatePassword").addEventListener("click", function(){
+    random_password = random_password_generate(16,8);
+    document.getElementById("randomPassword").value = random_password;
+});
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+function myFunction() {
 
-// BONUS EVENT LISTENER
+    var copyText = document.getElementById("randomPassword");
+
+    copyText.select();
+  
+  
+    document.execCommand("copy");
+  
+
+    alert("Copied the text: " + copyText.value);
+  }
+
